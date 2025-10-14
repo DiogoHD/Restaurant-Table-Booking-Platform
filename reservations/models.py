@@ -26,8 +26,18 @@ class Reservation(models.Model):
     
     # Clean allows form validation
     def clean(self):
+        # Checks if the table has enough seats for the guests
         if self.table and self.guests > self.table.seats:
             raise ValidationError(f"The table {self.table.number} only has {self.table.seats} seats and you have {self.guests} guests.")
         
-        if len(str(self.phone_number)) != 9:
-            raise ValidationError(f"Your phone number must have 9 digits")
+        # Checks if the phone number is a valid portuguese number
+        phone = str(self.phone_number)
+        if len(phone) != 9 and phone[0] != '9':
+            raise ValidationError(f"Your phone number must have 9 digits and start with a 9.")
+        
+        # Checks if the table is available at that time (for now only exact time)
+        if self.table:
+            # Filters all the objects for the table at that time
+            conflict = Reservation.objects.filter(table=self.table, date=self.date).exclude(pk=self.pk)     # exclude(pk=self.pk) ignores self object whn editing the data base
+            if conflict.exists():
+                raise ValidationError(f"The table {self.table.number} is already booked for this time.")
