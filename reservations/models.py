@@ -1,5 +1,8 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from datetime import timedelta
+
+RESERVATION_DURATION = timedelta(hours=2)
 
 # Create your models here.
 class Table(models.Model):
@@ -35,9 +38,18 @@ class Reservation(models.Model):
         if len(phone) != 9 and phone[0] != '9':
             raise ValidationError(f"Your phone number must have 9 digits and start with a 9.")
         
-        # Checks if the table is available at that time (for now only exact time)
+        # Checks if the table is available at that time (each reservation has a standard duration of 2 hours)
         if self.table:
-            # Filters all the objects for the table at that time
-            conflict = Reservation.objects.filter(table=self.table, date=self.date).exclude(pk=self.pk)     # exclude(pk=self.pk) ignores self object whn editing the data base
-            if conflict.exists():
-                raise ValidationError(f"The table {self.table.number} is already booked for this time.")
+            # Filters all the objects for the table
+            start_time = self.date
+            end_time = self.date + RESERVATION_DURATION
+            
+            # Loops through all reservations in that table
+            # exclude(pk=self.pk) ignores self object whn editing the data base
+            for r in Reservation.objects.filter(table=self.table).exclude(pk=self.pk):     
+                r_start = r.date
+                r_end = r.date + RESERVATION_DURATION
+                
+                # If the new reservation starts before the existing reservation ends and the new reservation ends after the new reservation starts
+                if (start_time < r_end) and (end_time > r_start):
+                    raise ValidationError(f"The table {self.table.number} is already booked for this time.")
