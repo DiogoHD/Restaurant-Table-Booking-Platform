@@ -52,7 +52,7 @@ class Reservation(models.Model):
         
         # Checks if the phone number is a valid portuguese number
         phone = str(self.phone_number)
-        if len(phone) != 9 and phone[0] != '9':
+        if len(phone) != 9 or phone[0] != '9':
             raise ValidationError(f"Your phone number must have 9 digits and start with a 9.")
         
         # Checks if the table is available at that time (each reservation has a standard duration of 2 hours)
