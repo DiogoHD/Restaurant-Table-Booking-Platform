@@ -1,0 +1,14 @@
+{% extends "base.html"%}
+
+{% block title %}
+Reservations Home
+{% endblock %}
+
+{% block content %}
+<h1>Tables</h1>
+<ul>
+    {% for table in available_tables %}
+        <li>Table {{table.number}} - {{table.seats}} seats</li>
+    {% endfor %}
+</ul>
+{% endblock %}   

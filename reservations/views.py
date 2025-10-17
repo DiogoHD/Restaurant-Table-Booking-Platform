@@ -7,6 +7,6 @@ from .models import Table
 # Create your views here.
 def tables(request):
     available_tables = Table.objects.all()
-    template = loader.get_template("main.html")
+    template = loader.get_template("home.html")
     context = {"available_tables": available_tables}
     return HttpResponse(template.render(context, request))
