@@ -1,0 +1,14 @@
+{% extends "base.html"%}
+
+{% block title %}
+Mesas
+{% endblock %}
+
+{% block content %}
+<h1>Mesas</h1>
+<ul>
+    {% for table in available_tables %}
+        <li>Mesa {{table.number}} - {{table.seats}} lugares</li>
+    {% endfor %}
+</ul>
+{% endblock %}   
