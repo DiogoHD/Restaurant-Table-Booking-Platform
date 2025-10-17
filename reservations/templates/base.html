@@ -3,18 +3,21 @@
     {% load static %}
     <head>
         <title>{% block title %}{% endblock %}</title>
-        <link rel="icon" type="image/png" href="{% static 'reservations/images/logo.png' %}">
+        <link rel="icon" type="image/png" href="{% static 'reservations/images/logo.png' %}">   <!--Favicon-->
         <meta charset="utf-8">
+        <meta name="author" content="Diogo Neves">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </head>
 
     <body>
+        <!--Navigation Bar-->
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="{% static 'reservations/images/logo.png' %}" alt="Logo" style="width:100px;" class="rounded-pill">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'reservations/images/logo.png' %}" alt="Logo" style="width:80px;" class="rounded-pill me-2">
+                    <span class="navbar-text text-white">Couraça</span>
                 </a>
             </div>
         </nav>
