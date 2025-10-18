@@ -20,8 +20,9 @@ def daily_summary(modeladmin, request, queryset):
 
 # Register your models here.
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ("table", "date", "first_name", "last_name", "guests", "phone_number", "notes")
-    list_filter = ("table", "date",)
+    list_display = ("table", "date", "name", "guests", "phone_number", "notes")
+    list_filter = ("date", "table",)
+    search_fields = ["name"]
     actions = [daily_summary]
 
 admin.site.register(Table)

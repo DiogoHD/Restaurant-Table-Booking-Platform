@@ -14,8 +14,7 @@ class Table(models.Model):
 
 
 class Reservation(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     phone_number = models.PositiveIntegerField()
     date = models.DateTimeField()
     guests = models.PositiveSmallIntegerField()
@@ -25,7 +24,7 @@ class Reservation(models.Model):
     notes = models.TextField(blank=True)
     
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - Table {self.table.number} at {self.date}"
+        return f"{self.name} - Table {self.table.number} at {self.date}"
     
     def is_available(self, table: Table) -> bool:
         # Filters all the objects for the table
