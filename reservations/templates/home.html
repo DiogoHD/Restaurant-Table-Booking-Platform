@@ -6,8 +6,10 @@ Couraça
 
 {% block content %}
 
+{% include "carousel.html" %}
+
 <!-- Button to make a reservation -->
 <div class="d-grid">
-    <a href="{% url 'reservation' %}" class="btn btn-primary btn-lg btn-block">Reservar</a>
+    <a href="{% url 'reservation' %}" class="btn btn-primary btn-lg btn-block rounded-0">Reservar</a>
 </div>
 {% endblock %}
