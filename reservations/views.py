@@ -1,8 +1,9 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 
 from .models import Table
+from .forms import ReservationForm
 
 
 def home(request: HttpRequest) -> HttpResponse:
@@ -14,3 +15,15 @@ def tables(request: HttpRequest) -> HttpResponse:
     template = loader.get_template("tables.html")
     context = {"available_tables": available_tables}
     return HttpResponse(template.render(context, request))
+
+# Views for the forms
+def reservation(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+    else:
+        form = ReservationForm()
+        
+    return render(request, "reservation.html", {"form": form})
