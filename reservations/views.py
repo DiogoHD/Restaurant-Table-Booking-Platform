@@ -18,12 +18,14 @@ def tables(request: HttpRequest) -> HttpResponse:
 
 # Views for the forms
 def reservation(request: HttpRequest) -> HttpResponse:
+    # If the user clicked to send the forms
     if request.method == "POST":
         form = ReservationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("home")
+            form.save()                 # Creates and saves the reservation in the model
+            return redirect("home")     # Redirects to home page after sending the forms
+    # The user has just open the page
     else:
-        form = ReservationForm()
+        form = ReservationForm()        # Shows empty forms
         
     return render(request, "reservation.html", {"form": form})
