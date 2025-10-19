@@ -1,5 +1,7 @@
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
+from django.utils.html import format_html
 
 from .forms import ReservationForm
 
@@ -25,6 +27,7 @@ def reservation(request: HttpRequest) -> HttpResponse:
         form = ReservationForm(request.POST)
         if form.is_valid():
             form.save()                 # Creates and saves the reservation in the model
+            messages.success(request, format_html("A tua reserva foi efetuada com <strong>sucesso</strong>!"))
             return redirect("home")     # Redirects to home page after sending the forms
     # The user has just open the page
     else:
