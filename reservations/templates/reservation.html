@@ -11,10 +11,22 @@ Couraça
         
         {% csrf_token %}
         
+        <!-- If there are errors, shows it on the top of the forms-->
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
         {% for field in form %}
             <div class="form-floating mb-3">
                 {{ field }}
                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% for error in field.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
             </div>
         {% endfor %}
 

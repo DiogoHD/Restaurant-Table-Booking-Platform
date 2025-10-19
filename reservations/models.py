@@ -51,13 +51,16 @@ class Reservation(models.Model):
         
         # Checks if the phone number is a valid portuguese number
         phone = str(self.phone_number)
-        if len(phone) != 9 or phone[0] != '9':
-            raise ValidationError(f"Your phone number must have 9 digits and start with a 9.")
+        if len(phone) != 9:
+            raise ValidationError("O teu número de telemóvel deve ter 9 dígitos.")
+        
+        if phone[0] != '9':
+            raise ValidationError("O teu número de telemóvel deve começar com um 9.")
         
         # Checks if the table is available at that time (each reservation has a standard duration of 2 hours)
         if self.table:
             if not self.is_available(self.table):
-                raise ValidationError(f"The table {self.table.number} is already booked for this time.")
+                raise ValidationError(f"A mesa {self.table.number} já está ocupada a esta hora.")
         
         # If the user doesn't choose a table, a table is automatically assigned
         else:
@@ -67,4 +70,4 @@ class Reservation(models.Model):
                     break
             
             if not self.table:
-                raise ValidationError(f"Sorry, the restaurant is fully booked at this time.")
+                raise ValidationError(f"Lamentamos, mas o restaurante já está cheio a esta hora. Por favor escolha outro horário.")
