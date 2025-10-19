@@ -1,8 +1,6 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
-from django.template import loader
+from django.shortcuts import redirect, render
 
-from .models import Table
 from .forms import ReservationForm
 
 
@@ -20,13 +18,6 @@ def home(request: HttpRequest) -> HttpResponse:
     context = {"carousel_images": carousel_images}
     return render(request, "home.html", context)
 
-# Create your views here.
-def tables(request: HttpRequest) -> HttpResponse:
-    available_tables = Table.objects.all()
-    template = loader.get_template("tables.html")
-    context = {"available_tables": available_tables}
-    return HttpResponse(template.render(context, request))
-
 # Views for the forms
 def reservation(request: HttpRequest) -> HttpResponse:
     # If the user clicked to send the forms
@@ -38,5 +29,5 @@ def reservation(request: HttpRequest) -> HttpResponse:
     # The user has just open the page
     else:
         form = ReservationForm()        # Shows empty forms
-        
+    
     return render(request, "reservation.html", {"form": form})
