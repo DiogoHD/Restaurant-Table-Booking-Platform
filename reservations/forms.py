@@ -10,6 +10,14 @@ class ReservationForm(forms.ModelForm):
         widgets = {
             "date": forms.DateTimeInput(attrs={"type": "datetime-local"}),      # Converts the data field from simple text type to data-time type
         }
+        labels = {
+            "name": "Nome e Apelido",
+            "phone_number": "Telemóvel",
+            "date": "Data e Hora",
+            "guests": "Número Total de Pessoas",
+            "table": "Mesa (Opcional)",
+            "notes": "Notas",
+        }
     
     # Constructor Method (Called every time we create an instance)
     def __init__(self, *args, **kwargs):
