@@ -15,10 +15,27 @@
         <!--Navigation Bar-->
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
+                <!-- Logo and Brand Name -->
                 <a class="navbar-brand" href="{% url 'home' %}">
                     <img src="{% static 'reservations/images/logo.png' %}" alt="Logo" style="width:80px;" class="rounded-pill me-2">
                     <span class="navbar-text text-white">Couraça</span>
                 </a>
+
+                <!-- Social Media -->
+                <div class="d-flex ms-auto">
+                    <a class="navbar-brand" href="https://www.ubereats.com/pt/store/cafe-couraca/NLa31sCFRKeHEiHy6CAV0g?srsltid=AfmBOooGL3_O4HXeekxYyU65NUzA72IPueCxlGdGyZPMr0U3hwxVy_hH">
+                        <img src="{% static 'reservations/images/uber-eats.png' %}" alt="Uber Eats" style="width:30px;" class="rounded-pill">
+                    </a>
+                    <a class="navbar-brand" href="https://www.tripadvisor.pt/Restaurant_Review-g189143-d7616194-Reviews-Cafe_Couraca-Coimbra_Coimbra_District_Central_Portugal.html">
+                        <img src="{% static 'reservations/images/tripadvisor.png' %}" alt="Tripadvisor" style="width:30px;" class="rounded-pill">
+                    </a>
+                    <a class="navbar-brand" href="https://www.facebook.com/cafecouraca/">
+                        <img src="{% static 'reservations/images/facebook.png' %}" alt="Facebook" style="width:30px;" class="rounded-pill">
+                    </a>
+                    <a class="navbar-brand" href="https://www.instagram.com/cafecouraca/">
+                        <img src="{% static 'reservations/images/instagram.png' %}" alt="Instagram" style="width:30px;" class="rounded-pill">
+                    </a>
+                </div>
             </div>
         </nav>
 
