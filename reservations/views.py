@@ -7,7 +7,18 @@ from .forms import ReservationForm
 
 
 def home(request: HttpRequest) -> HttpResponse:
-    return render(request, "home.html", {})
+    carousel_images = [
+        'reservations/images/indoor.jpg',
+        'reservations/images/bacalhau.jpg',
+        'reservations/images/bitoque.jpg',
+        'reservations/images/calamares.jpg',
+        'reservations/images/francesinha.jpg',
+        'reservations/images/hamburguer.jpg',
+        'reservations/images/ovos-rotos.jpg',
+        'reservations/images/pastel-de-nata.jpg',
+    ]
+    context = {"carousel_images": carousel_images}
+    return render(request, "home.html", context)
 
 # Create your views here.
 def tables(request: HttpRequest) -> HttpResponse:
