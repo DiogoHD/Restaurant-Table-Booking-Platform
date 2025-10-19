@@ -10,3 +10,13 @@ class ReservationForm(forms.ModelForm):
         widgets = {
             "date": forms.DateTimeInput(attrs={"type": "datetime-local"}),      # Converts the data field from simple text type to data-time type
         }
+    
+    # Constructor Method (Called every time we create an instance)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)           # The parent class (forms.ModelForm) initializes everything by default
+        for name, field in self.fields.items():     # Dictionary with every field on the forms
+            # Adds attributes to the field
+            field.widget.attrs.update({
+                'class': 'form-control',            # Applies a style to the 
+                'placeholder': field.label,     
+            })   
