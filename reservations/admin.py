@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from .models import Reservation, Table
 
+
 def daily_summary(modeladmin, request, queryset):
     reservations_today = queryset.filter(date__date=timezone.localdate())   # Filters for the reservations made today
     total_reservations = reservations_today.count()
