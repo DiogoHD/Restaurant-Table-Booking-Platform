@@ -47,7 +47,7 @@ class Reservation(models.Model):
     def clean(self):
         # Checks if the table has enough seats for the guests
         if self.table and self.guests > self.table.seats:
-            raise ValidationError(f"The table {self.table.number} only has {self.table.seats} seats and you have {self.guests} guests.")
+            raise ValidationError(f"A mesa {self.table.number} apenas tem {self.table.seats} lugares, mas tu queres reservar uma mesa para {self.guests} guests.")
         
         # Checks if the phone number is a valid portuguese number
         phone = str(self.phone_number)
